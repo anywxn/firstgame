@@ -541,8 +541,8 @@ size = Vector2(21.1923, 24.8308)
 script = ExtResource("1_54v03")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.45456, 1.60162)
-scale = Vector2(1.34091, 1.34091)
+position = Vector2(2.84217e-14, 1)
+scale = Vector2(1.41667, 1.41667)
 sprite_frames = SubResource("SpriteFrames_i88wg")
 animation = &"React"
 autoplay = "Idle"
