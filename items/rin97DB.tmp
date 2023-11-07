@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://cwjolsutcnh7p"]
+
+[ext_resource type="Texture2D" uid="uid://ofagxuhdqcpp" path="res://oak_woods_v1.0/Rings.png" id="1_0smnp"]
+[ext_resource type="Script" path="res://items/ring.gd" id="1_exlel"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcilc"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltdgs"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7c7k"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ide6w"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aieao"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(120, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gbi8"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(150, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c016"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(180, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn3yv"]
+atlas = ExtResource("1_0smnp")
+region = Rect2(210, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5s50m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcilc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltdgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7c7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ide6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aieao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gbi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c016")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sn3yv")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdq0m"]
+radius = 6.0
+
+[node name="Ring" type="Area2D"]
+script = ExtResource("1_exlel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.666667, 0.666667)
+sprite_frames = SubResource("SpriteFrames_5s50m")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hdq0m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
