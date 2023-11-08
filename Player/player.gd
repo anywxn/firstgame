@@ -1,8 +1,18 @@
 extends CharacterBody2D
 
+enum{
+	MOVE,
+	ATTACK1,
+	ATTACK2,
+	ATTACK3,
+	BLOCK,
+	SLIDE,
+}
+
 @onready var anim = $AnimatedSprite2D
+@onready var animPlayer = $AnimationPlayer
 var doublejump = true
-const SPEED = 300.0
+const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 const DJUMP = -200.0
 var Health = 100
@@ -10,21 +20,36 @@ var Rings = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+var state = MOVE
 
 func _physics_process(delta):
+	match state:
+		MOVE:
+			pass
+		ATTACK1:
+			pass
+		ATTACK2:
+			pass
+		ATTACK3:
+			pass
+		BLOCK:
+			pass
+		SLIDE:
+			pass
+		
+	####################################31 21 #8
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		anim.play("Jump")
+		animPlayer.play("Jump")
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		anim.play("Jump")
+		animPlayer.play("Jump")
 
 
 	# Get the input direction and handle the movement/deceleration.
@@ -33,11 +58,11 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction * SPEED
 		if velocity.y == 0:
-			anim.play("Fastrun")
+			animPlayer.play("Run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
-			anim.play("Idle")
+			animPlayer.play("Idle")
 	
 	if direction == 1:
 		$AnimatedSprite2D.flip_h = true
@@ -45,7 +70,7 @@ func _physics_process(delta):
 		$AnimatedSprite2D.flip_h = false
 		
 	if velocity.y > 1:
-		anim.play("Jump")
+		animPlayer.play("Jump")
 	
 	if Health <= 0:
 		queue_free()
