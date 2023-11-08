@@ -4,12 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://cvngqtyck6vnu" path="res://sonic.png" id="2_v71x1"]
 [ext_resource type="Texture2D" uid="uid://cprua0rwt7h6x" path="res://Player/sonic/sonic_idle0.png" id="3_1onjw"]
 [ext_resource type="Texture2D" uid="uid://6ithi68yjne8" path="res://Player/sonic/hurt.png" id="3_13k0g"]
+[ext_resource type="Texture2D" uid="uid://dybnfxh4vm8qv" path="res://Player/sonic/sonic_run2_0.png" id="3_ry633"]
+[ext_resource type="Texture2D" uid="uid://bgujjtepk4q75" path="res://Player/sonic/sonic_run2_1.png" id="4_32t1p"]
 [ext_resource type="Texture2D" uid="uid://bujs7nl8qqmof" path="res://Player/sonic/sonic_idle1.png" id="4_rpbt8"]
+[ext_resource type="Texture2D" uid="uid://bos8uu2pu4l0d" path="res://Player/sonic/sonic_run2_2.png" id="5_omh7j"]
 [ext_resource type="Texture2D" uid="uid://crs1k6iqrps1i" path="res://Player/sonic/sonic_idle2.png" id="5_rgmdx"]
+[ext_resource type="Texture2D" uid="uid://mt5ornj6lxss" path="res://Player/sonic/sonic_run2_3.png" id="6_6seyx"]
 [ext_resource type="Texture2D" uid="uid://dnxcy4kstqmb2" path="res://Player/sonic/sonic_idle3.png" id="6_bbmba"]
+[ext_resource type="Texture2D" uid="uid://cjvhlxwum8moh" path="res://Player/sonic/sonic_run2_4.png" id="7_4xafg"]
 [ext_resource type="Texture2D" uid="uid://cao372nego73n" path="res://Player/sonic/sonic_idle4.png" id="7_wm6dh"]
 [ext_resource type="Texture2D" uid="uid://6snw1k2usrue" path="res://Player/sonic/sonic_idle5.png" id="8_g4job"]
+[ext_resource type="Texture2D" uid="uid://dois4fr03egl3" path="res://Player/sonic/sonic_run2_5.png" id="8_qf47v"]
 [ext_resource type="Texture2D" uid="uid://paeq610w1jmv" path="res://Player/sonic/sonic_idle6.png" id="9_f13am"]
+[ext_resource type="Texture2D" uid="uid://b4g868n6wabqb" path="res://Player/sonic/sonic_run2_6.png" id="9_q0g52"]
+[ext_resource type="Texture2D" uid="uid://dyktsjknqo1ef" path="res://Player/sonic/sonic_run2_7.png" id="10_brjg6"]
 [ext_resource type="Texture2D" uid="uid://bmkhgkxd1up1g" path="res://Player/sonic/sonic_idle7.png" id="10_xh67e"]
 [ext_resource type="Texture2D" uid="uid://g0lj40awl308" path="res://Player/sonic/sonic_run4_0.png" id="11_54gue"]
 [ext_resource type="Texture2D" uid="uid://de0b581tfsbxi" path="res://Player/sonic/sonic_run4_1.png" id="12_w1abm"]
@@ -33,38 +41,6 @@ region = Rect2(156, 1037, 49, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rcppw"]
 atlas = ExtResource("2_v71x1")
 region = Rect2(205, 1037, 49, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ysxis"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(250, 392, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8utit"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(300, 392, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_shmtk"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(350, 392, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4kj4k"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(400, 392, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0vst"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(0, 441, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7yw3"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(50, 441, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_26udp"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(100, 441, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y3ite"]
-atlas = ExtResource("2_v71x1")
-region = Rect2(150, 441, 46, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tubk"]
 atlas = ExtResource("3_13k0g")
@@ -184,28 +160,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ysxis")
-}, {
-"duration": 1.2,
-"texture": SubResource("AtlasTexture_8utit")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_shmtk")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_4kj4k")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_h0vst")
-}, {
-"duration": 1.2,
-"texture": SubResource("AtlasTexture_u7yw3")
+"texture": ExtResource("3_ry633")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_26udp")
+"texture": ExtResource("4_32t1p")
 }, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_y3ite")
+"duration": 1.0,
+"texture": ExtResource("5_omh7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6seyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4xafg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qf47v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q0g52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_brjg6")
 }],
 "loop": true,
 "name": &"Fastrun",
@@ -227,7 +203,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wen6b")
 }],
-"loop": false,
+"loop": true,
 "name": &"Hurt",
 "speed": 12.0
 }, {
@@ -374,15 +350,16 @@ shape = SubResource("CapsuleShape2D_jsp7n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.771697, 0.86552)
 sprite_frames = SubResource("SpriteFrames_0evde")
-animation = &"Idle"
+animation = &"Fastrun"
 autoplay = "Idle"
+frame_progress = 0.132548
 offset = Vector2(0.386223, -2.20145)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 0
-limit_right = 1134
+limit_left = -2500
+limit_right = 2000
 limit_bottom = 655
 position_smoothing_enabled = true
 position_smoothing_speed = 14.0

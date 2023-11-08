@@ -54,6 +54,7 @@ func _on_death_2_body_entered(body):
 
 func Death():
 	alive = false
+	velocity.x = 0
 	anim.play("Death")
 	await anim.animation_finished
 	queue_free()
