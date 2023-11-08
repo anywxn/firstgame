@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ck6drpr6i68gn"]
+[gd_scene load_steps=13 format=3 uid="uid://ck6drpr6i68gn"]
 
 [ext_resource type="Texture2D" uid="uid://bywg8g2di5e40" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/sky.png" id="1_3vmq3"]
 [ext_resource type="PackedScene" uid="uid://1ubhd5hpfyal" path="res://Player/player.tscn" id="1_l84dl"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bt3qf60ieamo3" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine2.png" id="4_metu1"]
 [ext_resource type="Texture2D" uid="uid://bxbomfokxnjq3" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine1.png" id="5_pq6lp"]
 [ext_resource type="Script" path="res://Items.gd" id="7_f7qxs"]
-[ext_resource type="PackedScene" uid="uid://cb84cdoutmgm1" path="res://bg.tscn" id="9_0jpcy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rpng"]
 texture = ExtResource("3_umirk")
@@ -1127,7 +1126,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	text =\"HP: \" + str($\"../../Player/Player\".Health)
 "
 
@@ -1141,61 +1140,61 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	text =\"RINGS: \" + str($\"../../Player/Player\".Rings)
 "
 
 [node name="Level" type="Node2D"]
 
-[node name="bg" type="ParallaxBackground" parent="."]
-visible = false
-offset = Vector2(0, 500)
-transform = Transform2D(1, 0, 0, 1, 0, 500)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 270)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 270)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="bg"]
-position = Vector2(346.5, -20.5)
-motion_mirroring = Vector2(688.005, 0)
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 1)
+motion_mirroring = Vector2(1150, 0)
 
-[node name="Sky" type="Sprite2D" parent="bg/ParallaxLayer"]
-position = Vector2(-2, -66)
+[node name="Sky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(574.5, 321.75)
+scale = Vector2(1.67297, 3.06398)
 texture = ExtResource("1_3vmq3")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="bg"]
-position = Vector2(323.5, -110)
-motion_mirroring = Vector2(700, 0)
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(1150, 0)
 
-[node name="Cloud" type="Sprite2D" parent="bg/ParallaxLayer2"]
-position = Vector2(-2, -5)
+[node name="Cloud" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(568, 117)
+scale = Vector2(1.73529, 1.73529)
 texture = ExtResource("2_rjfjl")
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="bg"]
-position = Vector2(344.5, -9)
-scale = Vector2(1.21515, 0.862251)
-motion_mirroring = Vector2(566.3, 0)
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(1148.17, 0)
 
-[node name="Mountain2" type="Sprite2D" parent="bg/ParallaxLayer3"]
-position = Vector2(0, -5.79878)
-scale = Vector2(0.822944, 1.15976)
+[node name="Mountain2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(575, 362)
+scale = Vector2(1.6686, 1.6811)
 texture = ExtResource("3_5c1yy")
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="bg"]
-position = Vector2(349.5, 63.5)
-scale = Vector2(1.21515, 0.862251)
-motion_mirroring = Vector2(566.075, 0)
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(1150, 0)
 
-[node name="Pine2" type="Sprite2D" parent="bg/ParallaxLayer4"]
-position = Vector2(-4.93766, -3.47926)
-scale = Vector2(0.822944, 1.15976)
+[node name="Pine2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(576.503, 478)
+scale = Vector2(1.67588, 1.67588)
 texture = ExtResource("4_metu1")
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="bg"]
-position = Vector2(346.5, 96.5)
-scale = Vector2(1.21515, 0.862251)
-motion_mirroring = Vector2(565.95, 0)
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+scale = Vector2(1, 0.990676)
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(1150, 0)
 
-[node name="Pine1" type="Sprite2D" parent="bg/ParallaxLayer5"]
-position = Vector2(-1.64589, 5.79878)
-scale = Vector2(0.822944, 1.15976)
+[node name="Pine1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(575.432, 533.474)
+scale = Vector2(1.67568, 1.60278)
 texture = ExtResource("5_pq6lp")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -1236,7 +1235,3 @@ script = ExtResource("7_f7qxs")
 [node name="Timer" type="Timer" parent="Items"]
 wait_time = 5.0
 autostart = true
-
-[node name="bg2" parent="." instance=ExtResource("9_0jpcy")]
-
-[connection signal="timeout" from="Items/Timer" to="Items" method="_on_timer_timeout"]
