@@ -665,9 +665,6 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="Animation" id="Animation_syie6"]
-length = 0.001
-
 [sub_resource type="Animation" id="Animation_l1jh5"]
 length = 0.666667
 loop_mode = 1
@@ -941,6 +938,9 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Kill"]
 }
+
+[sub_resource type="Animation" id="Animation_syie6"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_rqmr6"]
 length = 1.33333

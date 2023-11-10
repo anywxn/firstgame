@@ -12,7 +12,7 @@ enum{
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 var doublejump = true
-const SPEED = 150.0
+const SPEED = 170.0
 const JUMP_VELOCITY = -400.0
 const DJUMP = -200.0
 var Health = 100
@@ -52,22 +52,6 @@ func _physics_process(delta):
 		animPlayer.play("Jump")
 
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
-		if velocity.y == 0:
-			animPlayer.play("Run")
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		if velocity.y == 0:
-			animPlayer.play("Idle")
-	
-	if direction == 1:
-		$AnimatedSprite2D.flip_h = true
-	elif direction == -1:
-		$AnimatedSprite2D.flip_h = false
 		
 	if velocity.y > 1:
 		animPlayer.play("Jump")
@@ -77,3 +61,19 @@ func _physics_process(delta):
 		get_tree().change_scene_to_file("res://menu.tscn")
 
 	move_and_slide()
+
+func move_state():
+	var direction = Input.get_axis("left", "right")
+	if direction:
+		velocity.x = direction * SPEED
+		if velocity.y == 0:
+			animPlayer.play("Run")
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if velocity.y == 0:
+			animPlayer.play("Idle")
+	if direction == 1:
+		$AnimatedSprite2D.flip_h = true
+		
+	elif direction == -1:
+		$AnimatedSprite2D.flip_h = false
