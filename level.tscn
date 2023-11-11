@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ck6drpr6i68gn"]
+[gd_scene load_steps=14 format=3 uid="uid://ck6drpr6i68gn"]
 
 [ext_resource type="Texture2D" uid="uid://bywg8g2di5e40" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/sky.png" id="1_3vmq3"]
 [ext_resource type="PackedScene" uid="uid://1ubhd5hpfyal" path="res://Player/player.tscn" id="1_l84dl"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bt3qf60ieamo3" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine2.png" id="4_metu1"]
 [ext_resource type="Texture2D" uid="uid://bxbomfokxnjq3" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine1.png" id="5_pq6lp"]
 [ext_resource type="Script" path="res://Items.gd" id="7_f7qxs"]
+[ext_resource type="PackedScene" uid="uid://c7hvdi5i1ppqt" path="res://Mobs/skeleton.tscn" id="9_dilo4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rpng"]
 texture = ExtResource("3_umirk")
@@ -1235,3 +1236,6 @@ script = ExtResource("7_f7qxs")
 [node name="Timer" type="Timer" parent="Items"]
 wait_time = 5.0
 autostart = true
+
+[node name="Skeleton" parent="." instance=ExtResource("9_dilo4")]
+position = Vector2(783, 538)

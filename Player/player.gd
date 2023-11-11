@@ -15,6 +15,7 @@ var doublejump = true
 const SPEED = 170.0
 const JUMP_VELOCITY = -400.0
 const DJUMP = -200.0
+var run_speed = 1
 var Health = 100
 var Rings = 0
 
@@ -25,7 +26,7 @@ var state = MOVE
 func _physics_process(delta):
 	match state:
 		MOVE:
-			pass
+			move_state()
 		ATTACK1:
 			pass
 		ATTACK2:
@@ -33,9 +34,9 @@ func _physics_process(delta):
 		ATTACK3:
 			pass
 		BLOCK:
-			pass
+			block_state()
 		SLIDE:
-			pass
+			slide_state()
 		
 	####################################31 21 #8
 	# Add the gravity.
@@ -57,6 +58,9 @@ func _physics_process(delta):
 		animPlayer.play("Jump")
 	
 	if Health <= 0:
+		Health = 0
+		animPlayer.play("Death")
+		await animPlayer.animation_finished
 		queue_free()
 		get_tree().change_scene_to_file("res://menu.tscn")
 
@@ -65,9 +69,12 @@ func _physics_process(delta):
 func move_state():
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED * run_speed
 		if velocity.y == 0:
-			animPlayer.play("Run")
+			if run_speed == 1:
+				animPlayer.play("Steps")
+			else:
+				animPlayer.play("Run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
@@ -77,3 +84,24 @@ func move_state():
 		
 	elif direction == -1:
 		$AnimatedSprite2D.flip_h = false
+	if Input.is_action_pressed("Run"):
+		run_speed = 2
+	else:
+		run_speed = 1
+	if Input.is_action_pressed("block") and is_on_floor():
+		if velocity.x == 0:
+			state = BLOCK
+		else:
+			state = SLIDE
+
+func block_state():
+	animPlayer.play("Block")
+	if Input.is_action_just_released("block"):
+		state = MOVE
+		
+
+func slide_state():
+	velocity.y = 0
+	animPlayer.play("Slide")
+	await animPlayer.animation_finished
+	state = MOVE
