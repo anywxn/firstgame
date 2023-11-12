@@ -7,6 +7,9 @@ enum{
 	ATTACK3,
 	BLOCK,
 	SLIDE,
+	SONICWIND,
+	JUMP,
+	DOUBLEJUMP,
 }
 
 @onready var anim = $AnimatedSprite2D
@@ -15,9 +18,16 @@ var doublejump = true
 const SPEED = 170.0
 const JUMP_VELOCITY = -400.0
 const DJUMP = -200.0
+var jumps = 0
+var MAXJUMPS = 2
 var run_speed = 1
 var Health = 100
 var Rings = 0
+var Combo = false
+var attack_cooldown = false
+var idle_timer = 0
+const IDLE_INTERVAL = 1000
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -28,34 +38,28 @@ func _physics_process(delta):
 		MOVE:
 			move_state()
 		ATTACK1:
-			pass
+			attack_state()
 		ATTACK2:
-			pass
+			attack2_state()
 		ATTACK3:
-			pass
+			attack3_state()
 		BLOCK:
 			block_state()
 		SLIDE:
 			slide_state()
+		SONICWIND:
+			sonicwind_state()
+		JUMP:
+			jump()
+		DOUBLEJUMP:
+			double_jump()
+		
 		
 	####################################31 21 #8
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_action_just_pressed("attack") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		animPlayer.play("Jump")
-
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		animPlayer.play("Jump")
-
-
-		
-	if velocity.y > 1:
-		animPlayer.play("Jump")
 	
 	if Health <= 0:
 		Health = 0
@@ -77,12 +81,22 @@ func move_state():
 				animPlayer.play("Run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		if velocity.y == 0:
+			
+	if velocity.length() == 0 and is_on_floor():
+		idle_timer += 1
+		if idle_timer > IDLE_INTERVAL:
+			animPlayer.play("Idle1")
+			await animPlayer.animation_finished
+			idle_timer = 0
+		else:
 			animPlayer.play("Idle")
-	if direction == 1:
+	
+
+	
+	if direction == 1 or velocity.x > 0:
 		$AnimatedSprite2D.flip_h = true
 		
-	elif direction == -1:
+	elif direction == -1 or velocity.x < 0:
 		$AnimatedSprite2D.flip_h = false
 	if Input.is_action_pressed("Run"):
 		run_speed = 2
@@ -93,6 +107,12 @@ func move_state():
 			state = BLOCK
 		else:
 			state = SLIDE
+			
+	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
+		state = ATTACK1
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		state = JUMP
 
 func block_state():
 	animPlayer.play("Block")
@@ -104,4 +124,56 @@ func slide_state():
 	velocity.y = 0
 	animPlayer.play("Slide")
 	await animPlayer.animation_finished
+	state = MOVE
+
+func attack_state():
+	if Input.is_action_just_pressed("attack") and Combo == true:
+		state = ATTACK2
+	velocity.x = 0
+	animPlayer.play("Attack1")
+	await animPlayer.animation_finished
+	attack_freze()
+	state = MOVE
+
+func attack2_state():
+	if Input.is_action_just_pressed("attack") and Combo == true:
+		state = ATTACK3
+	
+	animPlayer.play("Attack2")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func attack3_state():
+	if Input.is_action_just_pressed("attack") and Combo == true:
+		state = SONICWIND
+	
+	animPlayer.play("Attack3")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func sonicwind_state():
+	animPlayer.play("SonicWind")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func combo1():
+	Combo = true
+	await animPlayer.animation_finished
+	Combo = false
+
+func attack_freze():
+	attack_cooldown = true
+	await get_tree().create_timer(0.5).timeout
+	attack_cooldown = false
+
+func jump():
+	if is_on_floor() or jumps < MAXJUMPS:
+		velocity.y = JUMP_VELOCITY
+		animPlayer.play("Jump")
+		state = MOVE
+
+func double_jump():
+	animPlayer.play("Double jump")
+	await animPlayer.animation_finished
+	velocity.y += DJUMP
 	state = MOVE
