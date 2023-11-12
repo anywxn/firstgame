@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cakt48iydyb0g"]
+
+[ext_resource type="Texture2D" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/sky.png" id="1_w03lk"]
+[ext_resource type="Texture2D" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/cloud.png" id="2_8muhe"]
+[ext_resource type="Texture2D" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/mountain2.png" id="3_pqvj0"]
+[ext_resource type="Texture2D" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine2.png" id="4_ywjej"]
+[ext_resource type="Texture2D" path="res://oak_woods_v1.0/forest_tileset_lite/forest_tileset_lite/Sprites/Background/pine1.png" id="5_fygr6"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="Sky" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(574.5, 321.75)
+scale = Vector2(1.67297, 3.06398)
+texture = ExtResource("1_w03lk")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+
+[node name="Cloud" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(568, 117)
+scale = Vector2(1.73529, 1.73529)
+texture = ExtResource("2_8muhe")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+
+[node name="Mountain2" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(575, 362)
+scale = Vector2(1.6686, 1.6811)
+texture = ExtResource("3_pqvj0")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+
+[node name="Pine2" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(576.503, 478)
+scale = Vector2(1.67588, 1.67588)
+texture = ExtResource("4_ywjej")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+scale = Vector2(1, 0.990676)
+
+[node name="Pine1" type="Sprite2D" parent="ParallaxLayer5"]
+position = Vector2(575.432, 533.474)
+scale = Vector2(1.67568, 1.60278)
+texture = ExtResource("5_fygr6")

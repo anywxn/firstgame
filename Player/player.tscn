@@ -1869,6 +1869,7 @@ _data = {
 polygon = PackedVector2Array(43.4389, 124.272, -47.0588, 124.272, -36.1991, 112.621, 32.5792, 112.621)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_o33yy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1878,7 +1879,7 @@ shape = SubResource("CapsuleShape2D_jsp7n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.771697, 0.86552)
 sprite_frames = SubResource("SpriteFrames_0evde")
-animation = &"Idle"
+animation = &"slide1"
 autoplay = "Idle"
 offset = Vector2(0.386223, -2.20145)
 

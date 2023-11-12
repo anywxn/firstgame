@@ -4,9 +4,11 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var chase = false
-var speed = 150
+var speed = 60
 var alive = true
 @onready  var anim = $AnimatedSprite2D
+@onready  var animP = $AnimationPlayer
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -58,3 +60,8 @@ func Death():
 	anim.play("Death")
 	await anim.animation_finished
 	queue_free()
+
+
+func _on_attack_range_body_entered(body):
+	animP.play("Attack")
+

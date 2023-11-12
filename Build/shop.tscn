@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cyswi77n5rq7m"]
 
-[ext_resource type="Texture2D" uid="uid://cma0iucxxksdn" path="res://oak_woods_v1.0/decorations/shop_anim.png" id="1_idy2q"]
+[ext_resource type="Texture2D" uid="uid://cma0iucxxksdn" path="res://Assets/decorations/shop_anim.png" id="1_idy2q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j630f"]
 radius = 184.0
