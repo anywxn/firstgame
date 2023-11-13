@@ -27,7 +27,7 @@ var Combo = false
 var attack_cooldown = false
 var idle_timer = 0
 const IDLE_INTERVAL = 1000
-
+var player_pos
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -54,12 +54,13 @@ func _physics_process(delta):
 		DOUBLEJUMP:
 			double_jump()
 		
-		
+	player_pos = self.position
+	Signals.emit_signal("player_position_update", player_pos)
 	####################################31 21 #8
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	
 	
 	if Health <= 0:
 		Health = 0
@@ -67,7 +68,7 @@ func _physics_process(delta):
 		await animPlayer.animation_finished
 		queue_free()
 		get_tree().change_scene_to_file("res://menu.tscn")
-
+	
 	move_and_slide()
 
 func move_state():
@@ -167,13 +168,16 @@ func attack_freze():
 	attack_cooldown = false
 
 func jump():
-	if is_on_floor() or jumps < MAXJUMPS:
-		velocity.y = JUMP_VELOCITY
-		animPlayer.play("Jump")
-		state = MOVE
+	jumps = 0
+	velocity.y = JUMP_VELOCITY
+	animPlayer.play("Jump")
+	if jumps < MAXJUMPS and not is_on_floor():
+		state = DOUBLEJUMP
+
 
 func double_jump():
-	animPlayer.play("Double jump")
-	await animPlayer.animation_finished
-	velocity.y += DJUMP
-	state = MOVE
+	if Input.is_action_just_pressed("jump") and jumps < MAXJUMPS:
+		jumps += 1
+		velocity.y += DJUMP
+		animPlayer.play("Double jump")
+		state = MOVE
