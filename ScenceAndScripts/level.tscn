@@ -1349,7 +1349,7 @@ blend_mode = 1
 range_layer_min = -1
 
 [node name="DayNight" type="Timer" parent="."]
-wait_time = 180.0
+wait_time = 60.0
 autostart = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

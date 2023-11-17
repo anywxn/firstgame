@@ -17,9 +17,9 @@ enum{
 var doublejump = true
 const SPEED = 170.0
 const JUMP_VELOCITY = -400.0
-const DJUMP = -200.0
+const DJUMP = -100.0
 var jumps = 0
-var MAXJUMPS = 2
+var MAXJUMPS = 1
 var run_speed = 1
 var Health = 100
 var Rings = 0
@@ -180,6 +180,5 @@ func double_jump():
 		jumps += 1
 		velocity.y += DJUMP
 		animPlayer.play("Double jump")
-		state = MOVE
 	if is_on_floor():
 		state = MOVE
