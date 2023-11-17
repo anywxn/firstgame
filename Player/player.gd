@@ -171,7 +171,7 @@ func jump():
 	jumps = 0
 	velocity.y = JUMP_VELOCITY
 	animPlayer.play("Jump")
-	if jumps < MAXJUMPS and not is_on_floor():
+	if jumps < MAXJUMPS:
 		state = DOUBLEJUMP
 
 
@@ -180,4 +180,6 @@ func double_jump():
 		jumps += 1
 		velocity.y += DJUMP
 		animPlayer.play("Double jump")
+		state = MOVE
+	if is_on_floor():
 		state = MOVE
