@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ck6drpr6i68gn"]
+[gd_scene load_steps=27 format=3 uid="uid://ck6drpr6i68gn"]
 
 [ext_resource type="Texture2D" uid="uid://bywg8g2di5e40" path="res://Assets/forest_tileset_lite/forest_tileset_lite/Sprites/Background/sky.png" id="1_3vmq3"]
 [ext_resource type="Script" path="res://ScenceAndScripts/level.gd" id="1_cypnu"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://2o3p0cbs20gg" path="res://items/circle.png" id="12_lpkop"]
 [ext_resource type="FontFile" uid="uid://dxx7kfh62mneq" path="res://Font/TanaUncialSP.otf" id="12_pyc8e"]
 [ext_resource type="Script" path="res://ScenceAndScripts/Items.gd" id="13_3sjxk"]
+[ext_resource type="Texture2D" uid="uid://c4xb4gfwp6t6n" path="res://Assets/Bars/emt.png" id="14_3g04f"]
+[ext_resource type="Texture2D" uid="uid://ci8hw31pq0ot8" path="res://Assets/Bars/over.png" id="15_c28n1"]
+[ext_resource type="Texture2D" uid="uid://c2xbvu4j1u81k" path="res://Assets/Bars/status.png" id="16_gl8q8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3rpng"]
 texture = ExtResource("3_umirk")
@@ -1133,7 +1136,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	text =\"HP: \" + str($\"../../Player/Player\".Health)
+	text =str($\"../../Player/Player\".Health)
 "
 
 [sub_resource type="GDScript" id="GDScript_j0i1w"]
@@ -1299,14 +1302,29 @@ position = Vector2(276, 558)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 472.0
+offset_bottom = 54.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("14_3g04f")
+texture_over = ExtResource("15_c28n1")
+texture_progress = ExtResource("16_gl8q8")
+tint_progress = Color(0.631373, 0.14902, 0.239216, 1)
+
 [node name="HP" type="Label" parent="CanvasLayer"]
-offset_left = 24.0
-offset_top = 7.0
-offset_right = 194.0
-offset_bottom = 78.0
+anchors_preset = -1
+anchor_right = -0.0138889
+anchor_bottom = -0.0154321
+offset_left = 243.0
+offset_top = 38.0
+offset_right = 413.0
+offset_bottom = 109.0
 theme_override_fonts/font = ExtResource("12_pyc8e")
-theme_override_font_sizes/font_size = 30
-text = "HP"
+theme_override_font_sizes/font_size = 20
+text = "120"
 script = SubResource("GDScript_q5mi4")
 metadata/_edit_use_anchors_ = true
 
@@ -1336,10 +1354,6 @@ libraries = {
 "": SubResource("AnimationLibrary_glce7")
 }
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Items" type="Node2D" parent="."]
 script = ExtResource("13_3sjxk")
 
@@ -1361,4 +1375,5 @@ autostart = true
 position = Vector2(-1, 0)
 occluder = SubResource("OccluderPolygon2D_gi75t")
 
+[connection signal="health_changed" from="Player/Player" to="." method="_on_player_health_changed"]
 [connection signal="timeout" from="DayNight" to="." method="_on_day_night_timeout"]

@@ -2,6 +2,9 @@ extends CharacterBody2D
 #in future add skins
 #add blood mode
 #add levels
+
+signal health_changed(new_health)
+
 enum{
 	MOVE,
 	ATTACK1,
@@ -25,7 +28,8 @@ const DJUMP = -100.0
 var jumps = 0
 var MAXJUMPS = 1
 var run_speed = 1
-var Health = 100
+var MaxHealth = 120
+var Health
 var Rings = 0
 var Combo = false
 var attack_cooldown = false
@@ -39,6 +43,7 @@ var state = MOVE
 
 func _ready():
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
+	Health = MaxHealth
 
 func _physics_process(delta):
 	match state:
@@ -182,6 +187,7 @@ func double_jump():
 		jumps += 1
 		velocity.y += DJUMP
 		animPlayer.play("Double jump")
+		state = MOVE
 	if is_on_floor():
 		state = MOVE
 
@@ -205,4 +211,5 @@ func _on_damage_received(enemy_damage):
 		state = DEATH
 	else:
 		state = DAMAGE
+	emit_signal("health_changed", Health)
 	print(Health)
