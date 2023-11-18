@@ -28,6 +28,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left={
@@ -85,6 +89,8 @@ Run={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
+2d_physics/layer_5="PlayerHurtBox"
+2d_physics/layer_6="EnemyHurtBox"
 
 [rendering]
 

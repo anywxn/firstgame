@@ -22,6 +22,7 @@ var state: int = 0:
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player
 var direction
+var damage = 20
 
 func _ready():
 	Signals.connect("player_position_update", Callable(self, "_on_player_position_update"))
@@ -61,3 +62,7 @@ func chase_state():
 	else:
 		sprite.flip_h = false
 		$AttackDirection.rotation_degrees = 0
+
+
+func _on_hit_box_area_entered(area):
+	Signals.emit_signal("enemy_attack", damage)

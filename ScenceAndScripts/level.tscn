@@ -1336,6 +1336,10 @@ libraries = {
 "": SubResource("AnimationLibrary_glce7")
 }
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Items" type="Node2D" parent="."]
 script = ExtResource("13_3sjxk")
 
@@ -1344,6 +1348,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 energy = 0.9
 blend_mode = 1
 range_layer_min = -1

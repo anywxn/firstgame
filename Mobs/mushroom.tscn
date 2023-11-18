@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c5bc48tnjq5lk"]
+[gd_scene load_steps=47 format=3 uid="uid://c5bc48tnjq5lk"]
 
 [ext_resource type="Script" path="res://Mobs/mushroom.gd" id="1_7khdc"]
 [ext_resource type="Texture2D" uid="uid://b86f8vo1l0eip" path="res://Assets/Monsters_Creatures_Fantasy/Mushroom/Attack.png" id="1_cui73"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c61ae1auycsy4" path="res://Assets/Monsters_Creatures_Fantasy/Mushroom/Take Hit.png" id="3_ny21f"]
 [ext_resource type="Texture2D" uid="uid://ci1vse13puu8u" path="res://Assets/Monsters_Creatures_Fantasy/Mushroom/Idle.png" id="4_s2acn"]
 [ext_resource type="Texture2D" uid="uid://ba5bx7dq3ssaw" path="res://Assets/Monsters_Creatures_Fantasy/Mushroom/Run.png" id="5_va6ft"]
+[ext_resource type="PackedScene" uid="uid://di6gh1h64ojoa" path="res://ScenceAndScripts/damage_box.tscn" id="7_0d87l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r7gg3"]
 
@@ -259,6 +260,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Attack"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_jm2i5"]
 length = 0.8
@@ -369,17 +382,36 @@ tracks/1/keys = {
 "values": ["Walk"]
 }
 
+[sub_resource type="Animation" id="Animation_nhtu3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6fnv"]
 _data = {
 "Attack": SubResource("Animation_c7bsr"),
 "Death": SubResource("Animation_jm2i5"),
 "GetHit": SubResource("Animation_vsqqx"),
 "Idle": SubResource("Animation_y3hjm"),
+"RESET": SubResource("Animation_nhtu3"),
 "Walk": SubResource("Animation_y7yek")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7yiq"]
 size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hcvrk"]
+radius = 6.0
 
 [node name="Mushroom" type="CharacterBody2D"]
 collision_layer = 4
@@ -394,7 +426,7 @@ scale = Vector2(0.863333, 0.863333)
 sprite_frames = SubResource("SpriteFrames_senh3")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 6
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -412,4 +444,20 @@ collision_mask = 2
 position = Vector2(15, -1)
 shape = SubResource("RectangleShape2D_y7yiq")
 
+[node name="DamageBox" parent="." instance=ExtResource("7_0d87l")]
+
+[node name="HurtBox" parent="DamageBox" index="0"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="HitBox" parent="DamageBox" index="1"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="DamageBox/HitBox" index="0"]
+shape = SubResource("CircleShape2D_hcvrk")
+
 [connection signal="body_entered" from="AttackDirection/attackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="area_entered" from="DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
+
+[editable path="DamageBox"]

@@ -1,5 +1,7 @@
 extends CharacterBody2D
-
+#in future add skins
+#add blood mode
+#add levels
 enum{
 	MOVE,
 	ATTACK1,
@@ -10,6 +12,8 @@ enum{
 	SONICWIND,
 	JUMP,
 	DOUBLEJUMP,
+	DAMAGE,
+	DEATH,
 }
 
 @onready var anim = $AnimatedSprite2D
@@ -33,6 +37,9 @@ var player_pos
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var state = MOVE
 
+func _ready():
+	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
+
 func _physics_process(delta):
 	match state:
 		MOVE:
@@ -53,6 +60,10 @@ func _physics_process(delta):
 			jump()
 		DOUBLEJUMP:
 			double_jump()
+		DAMAGE:
+			damage_state()
+		DEATH:
+			death_state()
 		
 	player_pos = self.position
 	Signals.emit_signal("player_position_update", player_pos)
@@ -60,14 +71,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	
-	
-	if Health <= 0:
-		Health = 0
-		animPlayer.play("Death")
-		await animPlayer.animation_finished
-		queue_free()
-		get_tree().change_scene_to_file("res://menu.tscn")
 	
 	move_and_slide()
 
@@ -174,7 +177,6 @@ func jump():
 	if jumps < MAXJUMPS:
 		state = DOUBLEJUMP
 
-
 func double_jump():
 	if Input.is_action_just_pressed("jump") and jumps < MAXJUMPS:
 		jumps += 1
@@ -182,3 +184,25 @@ func double_jump():
 		animPlayer.play("Double jump")
 	if is_on_floor():
 		state = MOVE
+
+func damage_state():
+	velocity.x = 0 
+	animPlayer.play("Hurt")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func death_state():
+	velocity.x = 0 
+	animPlayer.play("Death")
+	await animPlayer.animation_finished
+	queue_free()
+	get_tree().change_scene_to_file("res://ScenceAndScripts/menu.tscn")
+
+func _on_damage_received(enemy_damage):
+	Health -= enemy_damage
+	if Health <= 0:
+		Health = 0
+		state = DEATH
+	else:
+		state = DAMAGE
+	print(Health)
